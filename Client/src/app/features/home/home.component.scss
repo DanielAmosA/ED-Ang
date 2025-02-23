@@ -1,0 +1,103 @@
+@use "../../layout/variables.scss" as *;
+
+// a design for a home
+
+div.homePage {
+  div.homeTop {
+    text-align: center;
+    margin-bottom: 3rem;
+
+    h1.homeTopTitle {
+      color: $primaryDark;
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(to right, $primaryDark, $primaryLight);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 2px 4px rgba($primaryDark, 0.1);
+    }
+
+    p.homeTopHeaderSubtitle {
+      color: $accent1;
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+      opacity: 0.9;
+    }
+
+    div.homeTopHeaderDivider {
+      width: 150px;
+      height: 4px;
+      margin: 0 auto;
+      background: linear-gradient(to right, $accent2, $accent3);
+      border-radius: 2px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  div.homePage {
+    padding: 1.5rem;
+
+    div.homeTop {
+      margin-bottom: 2rem;
+      h1.homeTopTitle {
+        font-size: 2rem;
+      }
+
+      p.homeTopHeaderSubtitle {
+        font-size: 1rem;
+      }
+
+      div.homeTopHeaderDivider {
+        width: 100px;
+      }
+    }
+  }
+}
+
+/* Responsive design */
+
+@media (max-width: 768px) {
+  div.homePage {
+    padding: 1.5rem;
+
+    div.homeTop {
+      margin-bottom: 2rem;
+      h1.homeTopTitle {
+        font-size: 2rem;
+      }
+
+      p.homeTopHeaderSubtitle {
+        font-size: 1rem;
+      }
+
+      div.homeTopHeaderDivider {
+        width: 100px;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  div.homePage {
+    padding: 1.3rem;
+
+    div.homeTop {
+      margin-bottom: 1.6rem;
+      h1.homeTopTitle {
+        font-size: 1.6rem;
+      }
+
+      p.homeTopHeaderSubtitle {
+        font-size: 0.8rem;
+      }
+
+      div.homeTopHeaderDivider {
+        width: 80px;
+      }
+    }
+  }
+}

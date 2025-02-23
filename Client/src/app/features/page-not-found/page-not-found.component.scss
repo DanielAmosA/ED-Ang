@@ -1,0 +1,151 @@
+@use "../../layout/variables.scss" as *;
+@use "../../layout/mixins.scss" as *;
+
+// a design for a page not found
+
+div.pageNotFoundPage {
+  mat-card.pageNotFoundContainer {
+    margin: 2rem;
+    background: white;
+    box-shadow: $cardShadow;
+
+    mat-card-content.pageNotFoundContent {
+      @include flex-center;
+      flex-direction: column;
+      padding: 2rem;
+
+      div.pageNotFoundContentError {
+        @include flex-center;
+        margin: 2rem 0;
+        span.pageNotFoundContentErrorDesc {
+          font-size: 5rem;
+          font-weight: bold;
+          white-space: normal;
+          color: $primaryDark;
+          @include transition-ease;
+
+          &:hover {
+            color: $accent1;
+            transform: scale(1.1);
+          }
+        }
+        mat-icon.pageNotFoundContentErrorIcon {
+          width: 4rem;
+          height: 4rem;
+          margin: 0 1rem;
+          color: $accent2;
+        }
+      }
+
+      mat-card-title.pageNotFoundContentTitle {
+        color: $primaryDark;
+        margin-bottom: 1rem;
+        font-size: 2rem;
+        text-align: center;
+      }
+      mat-card-subtitle.pageNotFoundContentSubTitle {
+        color: $accent2;
+        font-size: 1.2rem;
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+      mat-divider.pageNotFoundContentDivider {
+        width: 80%;
+        margin: 2rem 0;
+        background-color: $accent3;
+      }
+
+      div.pageNotFoundContentMain {
+        width: 100%;
+        max-width: 500px;
+        margin: 1rem 0;
+
+        mat-list.pageNotFoundContentMainList {
+          mat-list-item.pageNotFoundContentMainListItem {
+            height: auto;
+            margin: 1rem 0;
+
+            mat-icon.pageNotFoundContentMainListItemIcon {
+              color: $accent1;
+            }
+          }
+        }
+      }
+
+      div.pageNotFoundContentActionBtns {
+        @include flex-center;
+        gap: 1rem;
+        margin-top: 2rem;
+
+        button.pageNotFoundContentActionBtn {
+          color:$primaryDark;
+          @include transition-ease;
+          background: linear-gradient(to right, $accent3, $accent1);
+          box-shadow: $cardDataShadow;
+          &:hover {
+            box-shadow: $cardDataShadow;
+            transform: translateY(-2px);
+          }
+
+          mat-icon.pageNotFoundContentActionBtnIcon {
+            margin-right: 0.5rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+::ng-deep .mdc-list-item__primary-text{
+  white-space:normal;
+}
+
+/* Responsive design */
+
+@media (max-width: 768px) {
+  div.pageNotFoundPage {
+    mat-card.pageNotFoundContainer {
+      mat-card-content.pageNotFoundContent {
+        div.pageNotFoundContentError {
+          span.pageNotFoundContentErrorDesc {
+            font-size: 4rem;
+          }
+          mat-icon.pageNotFoundContentErrorIcon {
+            width: 3rem;
+            height: 3rem;
+            margin: 0 0.8rem;
+          }
+        }
+
+        mat-card-title.pageNotFoundContentTitle {
+          margin-bottom: 0.8rem;
+          font-size: 1.6rem;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px)  {
+  div.pageNotFoundPage {
+    mat-card.pageNotFoundContainer {
+      mat-card-content.pageNotFoundContent {
+        div.pageNotFoundContentError {
+          span.pageNotFoundContentErrorDesc {
+            font-size: 3rem;
+          }
+          mat-icon.pageNotFoundContentErrorIcon {
+            width: 2rem;
+            height: 2rem;
+            margin: 0 0.6rem;
+          }
+        }
+
+        mat-card-title.pageNotFoundContentTitle {
+          margin-bottom: 0.6rem;
+          font-size: 1.4rem;
+        }
+      }
+    }
+  }
+}

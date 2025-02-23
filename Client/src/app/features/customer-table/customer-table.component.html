@@ -1,0 +1,94 @@
+<div class="customerTableContainer" @fadeInOut>
+  <mat-card class="customerTableContainerContent">
+    <!-- Dashboard Top Data -->
+    <div class="customerTableContainerTop">
+      <h1 class="customerTableContainerTopTitle">
+        <mat-icon class="customerTableContainerTopTitleIcon">dashboard</mat-icon>
+        Customers Data :
+      </h1>
+      <div class="customerTableContainerInfo">
+        <ng-container *ngIf="!(loading$ | async) && !(error$ | async)">
+          <mat-chip class="customerTableContainerInfoDesc" selected>
+            Total: {{ totalCustomers$ | async }}
+          </mat-chip>
+        </ng-container>
+      </div>
+    </div>
+
+    <!-- Add Customer Button -->
+    <button
+      *ngIf="!(loading$ | async) && !(error$ | async)"
+      (click)="newCustomer()"
+      @buttonAnimation
+      class="customerTableContainerAddBtn">
+      <mat-icon class="customerTableContainerAddBtnIcon">add</mat-icon>
+      Add Customer
+    </button>
+  </mat-card>
+
+  <!-- Loading State -->
+  <div *ngIf="loading$ | async" class="loadDataMode" [@fadeInOut]>
+    <div class="loadDataModeDesc loadDataModeLoading" [@fadeInOut]>
+      <app-action-load-data
+        loadDataMsg="Loading customers data..."
+        loadDataMode="loading" />
+    </div>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error$ | async as error" class="loadDataMode" [@fadeInOut]>
+    <div class="loadDataModeDesc loadDataModeErroring" [@fadeInOut]>
+      <app-action-load-data
+        [loadDataMsg]="error"
+        loadDataMode="error" />
+      <button
+        class="loadDataModeDescBtn loadDataModeDescBtnErroring"
+        (click)="loadCustomersAgain()"
+        [@buttonState]="buttonMode"
+        (mouseenter)="buttonMode = 'hover'"
+        (mouseleave)="buttonMode = 'normal'">
+        <mat-icon class="loadDataModeDescBtnIcon">refresh</mat-icon>
+        Retry
+      </button>
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <ng-container *ngIf="customers$ | async as customers">
+    <div
+      *ngIf="!(loading$ | async) && !(error$ | async) && customers.length === 0"
+      class="loadDataMode"
+      [@fadeInOut]>
+      <div class="loadDataModeDesc loadDataModeNotFound" [@fadeInOut]>
+        <app-action-load-data
+          loadDataMsg="No customers found"
+          loadDataMode="notFound" />
+        <button
+          class="loadDataModeDescBtn loadDataModeDescBtnNotFound"
+          (click)="newCustomer()"
+          [@buttonState]="buttonMode"
+          (mouseenter)="buttonMode = 'hover'"
+          (mouseleave)="buttonMode = 'normal'">
+          <mat-icon class="loadDataModeDescBtnIcon">add</mat-icon>
+          Add First Customer
+        </button>
+      </div>
+    </div>
+
+    <!-- Data Table -->
+    <ng-container *ngIf="tableData$ | async as data">
+      <app-gen-table
+        *ngIf="!data.loading && !data.error && data.customers.length > 0"
+        [columns]="columns"
+        [data]="data.customers"
+        [totalItems]="data.totalCustomers"
+        [currentPage]="data.currentPage"
+        [pageSize]="data.pageSize"
+        (onEdit)="editCustomer($event)"
+        (onDelete)="deleteCustomer($event)"
+        (onPageChange)="loadCustomers($event)"
+        class="customersTableData">
+      </app-gen-table>
+    </ng-container>
+  </ng-container>
+</div>

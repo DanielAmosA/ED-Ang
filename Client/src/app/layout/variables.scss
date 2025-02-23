@@ -1,0 +1,13 @@
+// Defines color variables
+// Uses them to design the shadows and effects of elements on the site.
+
+$primaryDark: #103c75;
+$primaryLight: #5ecee1;
+$accent1: #39bcd8;
+$accent2: #53d1c6;
+$accent3: #bdf6bf;
+$accent4: #7cefc6;
+
+$cardShadow: 0 4px 20px rgba($primaryDark, 0.08);
+$cardDataShadow: 0 4px 20px rgba($accent4, 0.9);
+$hoverShadow: 0 6px 24px rgba($primaryLight, 0.12);

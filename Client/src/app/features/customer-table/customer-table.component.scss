@@ -1,0 +1,172 @@
+@use "../../layout/variables.scss" as *;
+@use "../../layout/loadData.scss" as *;
+
+// a design for a customer table
+
+// Container
+div.customerTableContainer {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  // Card Content
+  mat-card.customerTableContainerContent {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: $cardShadow;
+    transition: all 0.3s ease;
+
+    &:hover {
+      box-shadow: $hoverShadow;
+    }
+
+    // Top
+    div.customerTableContainerTop {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+
+      h1.customerTableContainerTopTitle {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin: 0;
+        color: $primaryDark;
+        font-size: 1.75rem;
+        font-weight: 600;
+
+        mat-icon.customerTableContainerTopTitleIcon {
+          color: $accent1;
+          width: 32px;
+          height: 32px;
+          font-size: 32px;
+        }
+      }
+
+      div.customerTableContainerInfo {
+        display: flex;
+        gap: 0.75rem;
+
+        mat-chip.customerTableContainerInfoDesc {
+          background: rgba($accent2, 0.8) !important;
+          color: $primaryDark !important;
+          font-weight: 500;
+          padding: 0.5rem 1rem;
+
+          &::after {
+            background: $accent2 !important;
+          }
+        }
+      }
+    }
+
+    button.customerTableContainerAddBtn {
+      background: $primaryDark !important;
+      color: white !important;
+      padding: 0.5rem 1.25rem !important;
+      border-radius: 8px !important;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.3s ease !important;
+      width: 50%;
+      margin-left: 25%;
+      justify-content: center;
+
+      &:hover {
+        background: rgba($accent1, 0.8) !important;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba($primaryDark, 0.2);
+      }
+
+      mat-ico.customerTableContainerAddBtnIcon {
+        width: 20px;
+        height: 20px;
+        font-size: 20px;
+      }
+    }
+  }
+
+  // Table Section
+  app-gen-table.customersTableData {
+    display: block;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: $cardShadow;
+    transition: all 0.3s ease;
+
+    &:hover {
+      box-shadow: $hoverShadow;
+    }
+  }
+
+  ::ng-deep {
+    div.mdc-text-field {
+      background: linear-gradient(to right, $primaryDark, blue);
+    }
+  }
+}
+
+/* Responsive design */
+
+@media (max-width: 768px) {
+  div.customerTableContainer {
+    padding: 0.75rem;
+    gap: 0.75rem;
+
+    mat-card.customerTableContainerContent {
+      padding: 1rem;
+
+      div.customerTableContainerTop {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+
+        h1.customerTableContainerTopTitle {
+          font-size: 1.25rem;
+
+          mat-icon.customerTableContainerTopTitleIcon {
+            width: 24px;
+            height: 24px;
+            font-size: 24px;
+          }
+        }
+
+        div.customerTableContainerInfo {
+          width: 100%;
+          justify-content: center;
+        }
+      }
+
+      button.customerTableContainerAddBtn {
+        justify-content: center;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  div.customerTableContainer {
+    padding: 0.5rem;
+    gap: 0.5rem;
+
+    mat-card.customerTableContainerContent {
+      padding: 0.75rem;
+
+      div.customerTableContainerTop {
+        h1.customerTableContainerTopTitle {
+          font-size: 1.1rem;
+        }
+      }
+      div.customerTableContainerInfo {
+        mat-chip.customerTableContainerInfoDesc {
+          font-size: 0.85rem;
+          padding: 0.4rem 0.75rem;
+        }
+      }
+    }
+  }
+}

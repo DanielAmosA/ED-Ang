@@ -1,0 +1,41 @@
+<div class="genTableContainer">
+  <mat-table class="genTableContent" [dataSource]="dataSource" matSort [@tableAnimation]="'in'">
+
+    <!-- Header -->
+    <ng-container class="genTableHeaderContainer" *ngFor="let column of columns" [matColumnDef]="column.key">
+      <mat-header-cell class="genTableHeaderLabel" *matHeaderCellDef mat-sort-header>
+        {{column.label}}
+      </mat-header-cell>
+      <mat-cell class="genTableHeaderContent" *matCellDef="let element">
+        {{element[column.key]}}
+      </mat-cell>
+    </ng-container>
+
+     <!-- Action -->
+    <ng-container class="genTableActionContainer" matColumnDef="actions">
+      <mat-header-cell class="genTableActionHeader" *matHeaderCellDef>Actions</mat-header-cell>
+      <mat-cell class="genTableActionColumn" *matCellDef="let element">
+        <button class="genTableActionColumnBtn genTableActionColumnBtnActivity" (click)="onEdit.emit(element)">
+          <mat-icon class="genTableActionColumnBtnIcon">edit</mat-icon>
+        </button>
+        <button class="genTableActionColumnBtn genTableActionColumnBtnWarning" (click)="onDelete.emit(element)">
+          <mat-icon class="genTableActionColumnBtnIcon">delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Row -->
+    <mat-header-row class="genTableRow" *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row class="genTableRowContent"  *matRowDef="let row; columns: displayedColumns;"
+             [@rowAnimation]="'in'" >
+    </mat-row>
+  </mat-table>
+
+  <!-- Paginator -->
+  <mat-paginator class="genTablePaginator" [length]="totalItems"
+  [pageSize]="pageSize"
+                 [pageSizeOptions]="[5, 10, 25, 100]"
+                 [pageIndex]="currentPage"
+                 (page)="onPageChange.emit($event)">
+  </mat-paginator>
+</div>

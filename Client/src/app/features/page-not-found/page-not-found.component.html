@@ -1,0 +1,50 @@
+<div class="page pageNotFoundPage">
+  <mat-card class="pageNotFoundContainer" [@fadeInOut]>
+    <mat-card-content class="pageNotFoundContent" [@bounceIn]>
+
+      <!-- Numbers -->
+      <div class="pageNotFoundContentError">
+        <span class="pageNotFoundContentErrorDesc" [@rotate]="numberState$ | async">4</span>
+        <mat-icon class="pageNotFoundContentErrorIcon" [@float]="floatState$ | async">
+          auto_awesome
+        </mat-icon>
+        <span class="pageNotFoundContentErrorDesc" [@rotate]="numberState$ | async">4</span>
+      </div>
+
+      <!-- Title -->
+      <mat-card-title class="pageNotFoundContentTitle">Page Not Found</mat-card-title>
+      <mat-card-subtitle class="pageNotFoundContentSubTitle">The page you're looking for has vanished into thin
+        air!</mat-card-subtitle>
+      <mat-divider class="pageNotFoundContentDivider"></mat-divider>
+
+      <!-- Desc -->
+      <div class="pageNotFoundContentMain" [@float]="floatState$ | async">
+        <mat-list class="pageNotFoundContentMainList">
+          <mat-list-item class="pageNotFoundContentMainListItem">
+            <mat-icon class="pageNotFoundContentMainListItemIcon">psychology</mat-icon>
+            <span class="pageNotFoundContentMainListItemDesc">Did you know? Even our best data wizards can't find this
+              page!</span>
+          </mat-list-item>
+          <mat-list-item class="pageNotFoundContentMainListItem">
+            <mat-icon class="pageNotFoundContentMainListItemIcon">bolt</mat-icon>
+            <span class="pageNotFoundContentMainListItemDesc">Maybe try searching in a different dimension?</span>
+          </mat-list-item>
+        </mat-list>
+      </div>
+
+      <!-- Action -->
+      <div class="pageNotFoundContentActionBtns">
+        <button class="pageNotFoundContentActionBtn" routerLink="/">
+          <mat-icon class="pageNotFoundContentActionBtnIcon">home</mat-icon>
+          Back to Home
+        </button>
+
+        <button class="pageNotFoundContentActionBtn" (click)="showEasterEgg()">
+          <mat-icon class="pageNotFoundContentActionBtnIcon">stars</mat-icon>
+          Cast a Spell
+        </button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+</div>

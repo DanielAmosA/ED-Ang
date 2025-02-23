@@ -1,0 +1,183 @@
+<div class="page customerMainPage">
+  <!-- Loading store -->
+  <ng-container *ngIf="loading$ | async as loading">
+
+    <!-- Loading State -->
+    <div *ngIf="loading.isLoading" class="loadDataMode" [@fadeInOut]>
+      <div class="loadDataModeDesc loadDataModeLoading" [@fadeInOut]>
+        <app-action-load-data [loadDataMsg]="loading.loadDataMsg" [loadDataMode]="'loading'" />
+      </div>
+    </div>
+
+    <!-- Error State -->
+    <div class="loadDataMode" *ngIf="!loading.isLoading && loading.isErroring" [@fadeInOut]>
+      <div class="loadDataModeDesc loadDataModeErroring" [@fadeInOut]>
+        <app-action-load-data [loadDataMsg]="loading.loadDataMsg" [loadDataMode]="'error'" />
+      </div>
+    </div>
+
+    <!-- Form State -->
+    <form *ngIf="!loading.isLoading && !loading.isErroring"
+          class="formContainer"
+          [formGroup]="customerForm"
+          (ngSubmit)="onSubmit()"
+          [@fadeInAnimation]>
+
+      <!-- Title -->
+      <ng-container *ngIf="formState$ | async as formState">
+        <h2 class="formTitle">
+          {{ formState.isEditMode ? "Edit Customer" : "Add New Customer" }}
+        </h2>
+      </ng-container>
+
+      <!-- Customer Main Data -->
+      <mat-form-field class="formField" appearance="fill" [@inputFocusAnimation]>
+        <mat-label class="formFieldLabel">Customer Name:</mat-label>
+        <input class="formFieldInput" matInput formControlName="name" />
+        <div *ngIf="onGetErrorMessage('name')" class="formFieldErrorMessage" [@errorMessageAnimation]>
+          {{ onGetErrorMessage("name") }}
+        </div>
+      </mat-form-field>
+
+      <mat-form-field class="formField" appearance="fill" [@inputFocusAnimation]>
+        <mat-label class="formFieldLabel">Customer Number:</mat-label>
+        <input class="formFieldInput" matInput formControlName="customerNumber" />
+        <div *ngIf="onGetErrorMessage('customerNumber')" class="formFieldErrorMessage" [@errorMessageAnimation]>
+          {{ onGetErrorMessage("customerNumber") }}
+        </div>
+      </mat-form-field>
+
+      <!-- Customer Type Selection -->
+      <mat-form-field class="formField" appearance="fill" [@inputFocusAnimation]>
+        <mat-label class="formFieldLabel">Customer Type:</mat-label>
+        <mat-select class="formFieldSelect" formControlName="customerTypeID">
+          <mat-option class="formFieldSelectOption"
+                     *ngFor="let type of customerTypes$ | async"
+                     [value]="type.id">
+            {{ type.customerTypeName }}
+          </mat-option>
+        </mat-select>
+        <div *ngIf="onGetErrorMessage('customerTypeID')" class="formFieldErrorMessage" [@errorMessageAnimation]>
+          {{ onGetErrorMessage("customerTypeID") }}
+        </div>
+      </mat-form-field>
+
+      <!-- Addresses Section -->
+      <div class="formAddressesSection" formArrayName="addresses">
+        <div class="formAddressesMain" *ngFor="let address of addresses.controls; let i = index">
+          <div class="formAddressesContent" [formGroupName]="i">
+            <mat-form-field class="formAddressesItemField" appearance="fill" [@inputFocusAnimation]>
+              <mat-label class="formAddressesItemFieldLabel">City:</mat-label>
+              <input class="formAddressesItemFieldInput" matInput formControlName="city" />
+              <div *ngIf="onGetErrorMessage('city', i, 'addresses')" class="formFieldErrorMessage" [@errorMessageAnimation]>
+                {{ onGetErrorMessage("city", i, "addresses") }}
+              </div>
+            </mat-form-field>
+
+            <mat-form-field class="formAddressesItemField" appearance="fill" [@inputFocusAnimation]>
+              <mat-label class="formAddressesItemFieldLabel">Street:</mat-label>
+              <input class="formAddressesItemFieldInput" matInput formControlName="street" />
+              <div *ngIf="onGetErrorMessage('street', i, 'addresses')" class="formFieldErrorMessage" [@errorMessageAnimation]>
+                {{ onGetErrorMessage("street", i, "addresses") }}
+              </div>
+            </mat-form-field>
+
+            <mat-form-field class="formAddressesItemField" appearance="fill" [@inputFocusAnimation]>
+              <mat-label class="formAddressesItemFieldLabel">Address Type:</mat-label>
+              <mat-select class="formAddressesItemFieldSelect" formControlName="addressTypesID">
+                <mat-option class="formAddressesItemFieldOption"
+                           *ngFor="let type of addressTypes$ | async"
+                           [value]="type.id">
+                  {{ type.addressTypeName }}
+                </mat-option>
+              </mat-select>
+              <div *ngIf="onGetErrorMessage('addressTypesID', i, 'addresses')" class="formFieldErrorMessage" [@errorMessageAnimation]>
+                {{ onGetErrorMessage("addressTypesID", i, "addresses") }}
+              </div>
+            </mat-form-field>
+
+            <button *ngIf="addresses.length > 1"
+                    class="formBtn formAddressesItemFieldBtn"
+                    type="button"
+                    (click)="removeAddress(i)">
+              Delete Address
+            </button>
+          </div>
+        </div>
+
+        <button class="formBtn formAddressesItemFieldBtn formBtnAdd"
+                type="button"
+                (click)="addAddress()">
+          Add Address
+        </button>
+      </div>
+
+      <!-- Contacts Section -->
+      <div class="formContactsSection" formArrayName="contacts">
+        <div class="formContactsMain" *ngFor="let contact of contacts.controls; let i = index">
+          <div class="formContactsContent" [formGroupName]="i">
+            <mat-form-field class="formContactsItemField" appearance="fill" [@inputFocusAnimation]>
+              <mat-label class="formContactsItemFieldLabel">Full Name:</mat-label>
+              <input class="formContactsItemFieldInput" matInput formControlName="fullName" required />
+              <div *ngIf="onGetErrorMessage('fullName', i, 'contacts')" class="formFieldErrorMessage" [@errorMessageAnimation]>
+                {{ onGetErrorMessage("fullName", i, "contacts") }}
+              </div>
+            </mat-form-field>
+
+            <mat-form-field class="formContactsItemField" appearance="fill" [@inputFocusAnimation]>
+              <mat-label class="formContactsItemFieldLabel">Office Number:</mat-label>
+              <input class="formContactsItemFieldInput" matInput formControlName="officeNumber" />
+              <div *ngIf="onGetErrorMessage('officeNumber', i, 'contacts')" class="formFieldErrorMessage" [@errorMessageAnimation]>
+                {{ onGetErrorMessage("officeNumber", i, "contacts") }}
+              </div>
+            </mat-form-field>
+
+            <mat-form-field class="formContactsItemField" appearance="fill" [@inputFocusAnimation]>
+              <mat-label class="formContactsItemFieldLabel">Email:</mat-label>
+              <input class="formContactsItemFieldInput" matInput formControlName="email" />
+              <div *ngIf="onGetErrorMessage('email', i, 'contacts')" class="formFieldErrorMessage" [@errorMessageAnimation]>
+                {{ onGetErrorMessage("email", i, "contacts") }}
+              </div>
+            </mat-form-field>
+
+            <button *ngIf="contacts.length > 1"
+                    class="formBtn formContactsItemFieldBtn"
+                    type="button"
+                    (click)="removeContact(i)">
+              Delete Contact
+            </button>
+          </div>
+        </div>
+
+        <button class="formBtn formContactsItemFieldBtn formBtnAdd"
+                type="button"
+                (click)="addContact()">
+          Add Contact
+        </button>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="formActions">
+        <button class="formBtn formBtnSub"
+                [class.formBtnSubmitting]="isSubmitting$ | async"
+                type="submit"
+                [@submitAnimation]
+                [disabled]="customerForm.invalid || (isSubmitting$ | async)">
+          {{
+            (isSubmitting$ | async)
+              ? "Sending..."
+              : (isEditMode$ | async)
+                ? "Update Customer"
+                : "Create Customer"
+          }}
+        </button>
+
+        <button class="formBtn formBtnRes"
+                type="button"
+                (click)="onResetCustomerData()">
+          Clear
+        </button>
+      </div>
+    </form>
+  </ng-container>
+</div>

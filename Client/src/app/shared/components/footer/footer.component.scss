@@ -1,0 +1,142 @@
+@use "../../../layout/variables.scss" as *;
+
+// a design for a footer
+
+footer.footerContainer {
+  background: linear-gradient(135deg, $primaryDark, $accent1);
+  color: white;
+  padding: 3rem 1rem 1rem;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(to right, $accent2, $accent4);
+  }
+
+  div.footerContent {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    padding-bottom: 2rem;
+
+    div.footerSection {
+      h3.footerSectionTitle {
+        color: $accent3;
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
+        position: relative;
+
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: -0.5rem;
+          left: 0;
+          width: 50px;
+          height: 2px;
+          background-color: $accent4;
+          transition: width 0.3s ease;
+        }
+      }
+
+      &:hover h3.footerSectionTitle::after {
+        width: 75px;
+      }
+
+      ul.footerSectionList {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li.footerSectionListItem {
+          margin-bottom: 0.8rem;
+          transition: transform 0.2s ease;
+
+          a.footerSectionLink {
+            color: white;
+            text-decoration: none;
+            transition: color 0.2s ease;
+
+            &:hover {
+              color: $accent3;
+            }
+          }
+
+          &:hover {
+            transform: translateX(5px);
+          }
+        }
+      }
+
+      div.footerSectionSocial {
+        display: flex;
+        gap: 1rem;
+
+        a.footerSectionSocialLink {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          background-color: rgba(255, 255, 255, 0.1);
+          transition: all 0.3s ease;
+          text-decoration: none;
+
+          &:hover {
+            background-color: $accent2;
+            transform: translateY(-3px);
+          }
+
+          mat-icon.footerSectionSocialLinkIcon {
+            font-size: 20px;
+            color:$accent3 ;
+          }
+        }
+      }
+    }
+  }
+
+  div.footerBottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+    p.footerBottomDesc {
+      margin: 0;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+  }
+}
+
+                                    /* Responsive design */
+
+@media (max-width: 768px) {
+  footer.footerContainer {
+    div.footerContent {
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+
+      div.footerSection {
+        text-align: center;
+
+        h3.footerSectionTitle::after {
+          left: 50%;
+          transform: translateX(-50%);
+        }
+
+        mat-ico.footerSectionSocialLinkIcon {
+          justify-content: center;
+        }
+      }
+    }
+  }
+}

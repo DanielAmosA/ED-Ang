@@ -1,0 +1,17 @@
+<mat-card class="loadDataContainer" [@fadeInOut]>
+  <!-- Title -->
+  <mat-card-actions class="loadDataHeader">
+    <mat-card-title class="loadDataHeaderTitle">{{
+      loadDataTitle
+    }}</mat-card-title>
+  </mat-card-actions>
+
+  <!-- Icon -->
+  <mat-card-content class="loadDataContent">
+    <mat-icon class="loadDataContentIcon">{{ loadDataIco }}</mat-icon>
+
+    <!-- Message -->
+    <p class="loadDataContentDesc">{{ loadDataMsg }}</p>
+    <img [src]="loadDataImg" alt="load Data Img" class="loadDataContentImg" />
+  </mat-card-content>
+</mat-card>

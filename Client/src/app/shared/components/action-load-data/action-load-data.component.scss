@@ -1,0 +1,129 @@
+@use "../../../layout/variables.scss" as *;
+
+// a design for an action load data
+
+mat-card.loadDataContainer {
+  background: linear-gradient(to right, $accent1, $accent3);
+  color: #1d2cfa;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  margin: 15px auto;
+  border-radius: 12px;
+  overflow: hidden;
+
+  mat-card-header.loadDataHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin-bottom: 1rem;
+
+    mat-card-title.loadDataHeaderTitle {
+      color: $primaryDark;
+      font-size: 1.5rem;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      hyphens: auto;
+      line-height: 1.2;
+    }
+  }
+
+  mat-card-content.loadDataContent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0;
+
+    mat-icon.loadDataContentIcon {
+      width: 2.5rem;
+      height: 2.5rem;
+      color: $accent3;
+      margin-bottom: 1rem;
+    }
+
+    p.loadDataContentDesc {
+      font-size: 1rem;
+      margin: 0.5rem 0;
+      padding: 0 1rem;
+      width: 100%;
+      max-width: 100%;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+      hyphens: auto;
+      line-height: 1.4;
+      // Support for... when the text is too long
+      display: -webkit-box;
+      line-clamp: 3;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    img.loadDataContentImg {
+      max-width: 150px;
+      height: auto;
+      margin-top: 1rem;
+      object-fit: contain;
+    }
+  }
+}
+
+/* Responsive design */
+
+@media (max-width: 768px) {
+  mat-card.loadDataContainer {
+    padding: 1rem;
+    max-width: 350px;
+    mat-card-header.loadDataHeader{
+      mat-card-title.loadDataHeaderTitle{
+        font-size: 1.3rem;
+      }
+    }
+    mat-card-content.loadDataContent {
+      p.loadDataContentDesc {
+        font-size: 0.8rem;
+        line-clamp: 4;
+        -webkit-line-clamp: 4;
+      }
+
+      img.loadDataContentImg {
+        max-width: 120px;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  mat-card.loadDataContainer {
+    max-width: 300px;
+    padding: 0.8rem;
+    mat-card-header.loadDataHeader{
+      mat-card-title.loadDataHeaderTitle{
+        font-size: 0.8rem;
+      }
+    }
+    mat-card-content.loadDataContent {
+      p.loadDataContentDesc {
+        font-size: 0.7rem;
+        line-clamp: 5;
+        -webkit-line-clamp: 5;
+      }
+
+      img.loadDataContentImg {
+        max-width: 80px;
+      }
+    }
+  }
+}

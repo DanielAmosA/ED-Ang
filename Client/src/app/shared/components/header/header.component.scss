@@ -1,0 +1,149 @@
+@use '../../../layout/variables.scss' as *;
+
+// a design for a header
+
+mat-toolbar.headerContainer {
+  background: linear-gradient(135deg,$primaryDark, $primaryLight);
+  padding: 0;
+  width: 100%;
+
+  div.headerContent {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+
+    div.logoSection {
+      padding: 0.5rem 0;
+
+      img.logoSectionImg {
+        height: 40px;
+        width: auto;
+        transition: transform 0.3s ease;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+    }
+
+    div.nameSection {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+
+      h1.nameSectionTitle {
+        color: $accent3;
+        margin: 0 2rem;
+        font-size: 1rem;
+        font-weight: 500;
+        letter-spacing: 1px;
+      }
+
+      span.nameSectionDesc{
+        font-size: 0.8rem;
+      }
+    }
+
+    nav.deskNavSection {
+      margin-left: auto;
+      display: flex;
+      gap: 1rem;
+
+      button.deskNavSectionBtn {
+        color: white;
+        position: relative;
+        overflow: hidden;
+        transition: background-color 0.3s ease;
+        background: linear-gradient(135deg,$primaryDark, $primaryLight);
+
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          width: 0;
+          height: 2px;
+          background: $accent4;
+          transition: all 0.3s ease;
+        }
+
+        &:hover::after {
+          width: 100%;
+          left: 0;
+        }
+
+        &.deskNavSectionBtnActive {
+          background: linear-gradient(135deg,$accent3, $primaryLight);
+          font-weight: 500;
+
+          &::after {
+            width: 100%;
+            left: 0;
+            background: $accent2;
+            height: 3px;
+          }
+        }
+      }
+    }
+
+    button.openMobNavSectionBtn {
+      margin-left: auto;
+      color: white;
+      background: linear-gradient(135deg,$accent3, $primaryLight);
+    }
+  }
+}
+
+div.mobNavSection {
+  position: fixed;
+  right: 0px;
+  width: 17%;
+  top: 64px;
+  background: linear-gradient(135deg,$primaryDark, $primaryLight);
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  z-index: 10000;
+
+  button.mobNavSectionBtn {
+    color: white;
+    padding: 1rem;
+    text-align: left;
+    transition: background-color 0.3s ease;
+    background: linear-gradient(135deg,$primaryDark, $primaryLight);
+    &:hover {
+      border-bottom: 4px solid $accent2;
+    }
+
+    &.mobNavSectionBtnActive {
+      background: linear-gradient(135deg,$accent3, $primaryLight);
+      font-weight: 500;
+    }
+  }
+}
+
+                                    /* Responsive design */
+
+@media (max-width: 768px) {
+  mat-toolbar.headerContainer {
+    div.headerContent {
+      div.logoSection img.logoSectionImg {
+        height: 32px;
+      }
+
+      div.nameSection {
+        h1.nameSectionTitle {
+          font-size: 0.8rem;
+          margin: 0 1rem;
+        }
+
+        span.nameSectionDesc{
+          font-size: 0.6rem;
+        }
+      }
+    }
+  }
+}

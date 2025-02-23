@@ -1,0 +1,109 @@
+@use "./variables.scss" as *;
+@use "./mixins.scss" as *;
+
+// a design for a loadData
+
+div.loadDataMode {
+  @include flex-center;
+  div.loadDataModeDesc {
+    @include flex-center;
+    flex-direction: column;
+    background: white;
+    border-radius: 8px;
+    padding: 2rem;
+    margin: 1rem 0;
+    min-height: 100px;
+    width: fit-content;
+    box-shadow: $cardDataShadow;
+    transition: box-shadow 0.3s ease;
+    background: linear-gradient(to right, $primaryDark, $primaryLight);
+
+    &:hover {
+      box-shadow: $hoverShadow;
+    }
+
+    // Buttons loading mode
+    button.loadDataModeDescBtn {
+      @include flex-center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      outline: none;
+
+      mat-icon.loadDataModeDescBtnIcon {
+        margin-right: 0.25rem;
+      }
+      // Error mode button
+      &.loadDataModeDescBtnErroring {
+        background-color: $accent2;
+        color: white;
+
+        &:hover {
+          background-color: rgba($primaryLight, 0.6);
+          box-shadow: $hoverShadow;
+        }
+      }
+
+      // Not found mode button
+      &.loadDataModeDescBtnNotFound {
+        background-color: $primaryLight;
+        color: white;
+
+        &:hover {
+          background-color: rgba($primaryLight, 0.8);
+          box-shadow: $hoverShadow;
+        }
+      }
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba($primaryLight, 0.3);
+      }
+    }
+
+    // Loading mode
+    div.loadDataModeLoading {
+      background-color: rgba(white, 0.98);
+    }
+    // Error state specific styles
+    div.loadDataModeErroring {
+      background-color: rgba($accent1, 0.05);
+      border: 1px solid rgba($accent1, 0.1);
+    }
+
+    // Not Found mode specific styles
+    div.loadDataModeNotFound {
+      background-color: rgba($primaryLight, 0.05);
+      border: 1px solid rgba($primaryLight, 0.1);
+    }
+  }
+
+  /* Responsive design */
+
+  @media (max-width: 768px) {
+    div.loadDataModeDesc {
+      padding: 1.5rem;
+      min-height: 180px;
+    }
+
+    button.loadDataModeDescBtn {
+      padding: 0.5rem 1.25rem;
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    div.loadDataModeDesc {
+      padding: 1.3rem;
+      min-height: 160px;
+    }
+
+    button.loadDataModeDescBtn {
+      padding: 0.3rem 1rem;
+      font-size: 0.6rem;
+    }
+  }
+}

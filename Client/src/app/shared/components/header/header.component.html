@@ -1,0 +1,43 @@
+<mat-toolbar class="headerContainer">
+  <div class="headerContent">
+    <!-- Logo -->
+    <div class="logoSection" [@fadeInOut]>
+      <img class="logoSectionImg" src="assets/images/site/logo.png" alt="Logo">
+    </div>
+
+    <div class="nameSection">
+      <h1 class="nameSectionTitle" [@fadeInOut]>ED - Company</h1>
+      <span class="nameSectionDesc">Your data, our priority.</span>
+    </div>
+
+    <!-- Desktop Navigation -->
+    <nav class="deskNavSection" *ngIf="!isMobileSubject.getValue()" [@fadeInOut]>
+      <button mat-button *ngFor="let item of menuItems"
+              [routerLink]="item.path"
+              routerLinkActive="deskNavSectionBtnActive"
+              [routerLinkActiveOptions]="{exact: true}"
+              class="deskNavSectionBtn">
+              <mat-icon class="deskNavSectionBtnIcon" *ngIf="item.icon">{{item.icon}}</mat-icon>
+        {{item.label}}
+      </button>
+    </nav>
+
+    <!-- Mobile Menu Button -->
+    <button class="openMobNavSectionBtn" mat-icon-button *ngIf="isMobileSubject.getValue()"
+            (click)="toggleMenu()">
+      <mat-icon class="openMobNavSectionBtnIcon">{{isMenuOpen ? 'close' : 'menu'}}</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>
+
+<!-- Mobile Navigation Menu -->
+<div class="mobNavSection" *ngIf="isMobileSubject.getValue() && isMenuOpen">
+  <button mat-button *ngFor="let item of menuItems"
+          [routerLink]="item.path"
+          routerLinkActive="mobNavSectionBtnActive"
+          [routerLinkActiveOptions]="{exact: true}"
+          class="mobNavSectionBtn">
+          <mat-icon class="mobNaviSectionBtnIcon" *ngIf="item.icon">{{item.icon}}</mat-icon>
+          {{item.label}}
+  </button>
+</div>

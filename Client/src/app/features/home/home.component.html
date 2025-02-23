@@ -1,0 +1,16 @@
+<div class="page homePage">
+  <div class="homeTop" @fadeInAnimation>
+
+    <!-- Title -->
+    <h1 class="homeTopTitle">Welcome to Our Customer Hub</h1>
+
+    <!-- Sentence -->
+    <p class="homeTopHeaderSubtitle" *ngIf="!isLoading" [@sentenceAnimation]="animationSentenceSt">
+      {{ currentSentence }}
+    </p>
+    <div class="homeTopHeaderDivider"></div>
+  </div>
+
+  <!-- Customer table -->
+  <app-customer-table></app-customer-table>
+</div>

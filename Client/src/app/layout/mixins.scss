@@ -1,0 +1,11 @@
+//Mixins definitions that add styles in a generic and reusable way.
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin transition-ease {
+  transition: all 0.3s ease;
+}

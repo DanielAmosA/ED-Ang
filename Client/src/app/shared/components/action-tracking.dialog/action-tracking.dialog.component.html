@@ -1,0 +1,75 @@
+<div
+  mat-dialog-content
+  class="dialogContainer"
+  [ngClass]="data.type"
+  [@dialogOpen]
+  [@successOpen]="data.type === 'success' ? 'open' : ''"
+  [@warningOpen]="data.type === 'warning' ? 'open' : ''"
+  [@errorOpen]="data.type === 'error' ? 'open' : ''"
+>
+  <!-- Img -->
+  <div class="dialogHeader">
+    <img
+      *ngIf="data.type === 'success'"
+      src="assets/images/dialog/success.gif"
+      alt="Success Img"
+      class="dialogImg"
+    />
+    <img
+      *ngIf="data.type === 'warning'"
+      src="assets/images/dialog/warning.gif"
+      alt="Warning Img"
+      class="dialogImg"
+    />
+    <img
+      *ngIf="data.type === 'error'"
+      src="assets/images/dialog/error.gif"
+      alt="Error Img"
+      class="dialogImg"
+    />
+
+    <!-- Title -->
+    <h2 class="dialogTitle">{{ data.title }}</h2>
+  </div>
+
+  <!-- Message -->
+  <div class="dialogBody">
+    <p class="dialogMessage">{{ data.message }}</p>
+  </div>
+
+  <!-- Actions -->
+  <div mat-dialog-actions class="dialogFooter">
+    <button
+      *ngIf="data.type === 'warning'"
+      [@buttonAnimation]
+      (click)="onConfirm()"
+      class="dialogBtn confirm"
+    >
+      Continue
+    </button>
+    <button
+      *ngIf="data.type === 'warning'"
+      [@buttonAnimation]
+      (click)="onCancel()"
+      class="dialogBtn cancel"
+    >
+      Cancel
+    </button>
+    <button
+      *ngIf="data.type === 'success'"
+      [@buttonAnimation]
+      (click)="onClose()"
+      class="dialogBtn successClose"
+    >
+      Close
+    </button>
+    <button
+      *ngIf="data.type === 'error'"
+      [@buttonAnimation]
+      (click)="onClose()"
+      class="dialogBtn errorClose"
+    >
+      Close
+    </button>
+  </div>
+</div>
